@@ -46,29 +46,36 @@ void main() {
 **实现代码：**
 
 ```c
-#include <reg52.h>
-#include <intrins.h> // 包含移位函数头文件
+#include "reg52.h"
+#include "intrins.h"
+typedef unsigned int u16;
+typedef unsigned char u8;
+#define LED_PORT	P2	
 
-#define LED_PORT P1
-
-void delay(unsigned int i) {
-    while(i--);
+void delay_10us(u16 ten_us)
+{
+	while(ten_us--);	
 }
 
-void main() {
-    unsigned char i;
-    LED_PORT = 0xFE; // 初始值：11111110
-    
-    while(1) {
-        for(i=0; i<7; i++) {
-            delay(50000); // 简单延时
-            LED_PORT = _crol_(LED_PORT, 1); // 循环左移
-        }
-        for(i=0; i<7; i++) {
-            delay(50000);
-            LED_PORT = _cror_(LED_PORT, 1); // 循环右移
-        }
-    }
+void main()
+{	
+   	u8 i=0;
+
+	LED_PORT=~0x01;
+	delay_10us(50000);
+	while(1)
+	{
+		for(i=0;i<7;i++)	 
+		{									  
+			LED_PORT=_crol_(LED_PORT,1);
+			delay_10us(50000); 	
+		}
+		for(i=0;i<7;i++)	
+		{
+			LED_PORT=_cror_(LED_PORT,1);
+			delay_10us(50000);	
+		}	
+	}		
 }
 ```
 
