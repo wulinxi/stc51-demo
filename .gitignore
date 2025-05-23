@@ -1,0 +1,9 @@
+*.uvproj
+*.uvproj.*
+*.uvopt
+*.uvopt.*
+*.uvgui
+*.uvgui.*
+*.A51
+Listings/
+Objects/
